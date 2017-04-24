@@ -30,11 +30,21 @@
   "homepage": "https://github.com/kadoBOT/reaxor#readme",
   "dependencies": {
     "aphrodite": "^0.3.1",
+    "axios": "^0.16.1",
     "babel-register": "^6.8.0",
+    "bootstrap": "^4.0.0-alpha.6",
+    "install": "^0.8.8",
     "mobx": "^2.1.5",
     "mobx-react": "^3.1.0",
-    "react": "^15.0.2",
-    "react-dom": "^15.0.2"
+    "npm": "^4.5.0",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-addons-css-transition-group": "^15.5.2",
+    "react-addons-transition-group": "^15.5.2",
+    "react-axios": "0.0.9",
+    "react-dom": "^15.5.4",
+    "react-prop-types": "^0.4.0",
+    "reactstrap": "^4.5.0"
   },
   "devDependencies": {
     "babel-core": "^6.8.0",

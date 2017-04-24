@@ -1,13 +1,16 @@
 import React from 'react'
+import Axios from 'react-axios'
+import PropTypes from 'prop-types'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
 import Redbox from 'redbox-react'
 import a11y  from 'react-a11y'
+import { Provider } from 'mobx-react'
 import Store from './stores/Store'
 import App from './components/App'
 import {whyDidYouUpdate} from 'why-did-you-update'
 
-const store = new Store()
+const appStore = new Store()
 
 const consoleErrorReporter = ({error}) => {
   console.error(error)
@@ -15,7 +18,7 @@ const consoleErrorReporter = ({error}) => {
 }
 
 consoleErrorReporter.propTypes = {
-  error: React.PropTypes.error,
+  error: PropTypes.error,
 }
 
 if(process.env.NODE_ENV === 'development') {
@@ -27,7 +30,11 @@ if(process.env.NODE_ENV === 'development') {
 
 render(
   <AppContainer>
-    <App store={store} />
+    <Axios>
+      <Provider appStore={appStore}>
+        <App appStore={appStore} />
+      </Provider>
+    </Axios>
   </AppContainer>,
   document.getElementById('root')
 )
@@ -37,7 +44,9 @@ if (module.hot) {
     let AppNext = require('./components/App').default
     render(
       <AppContainer>
-        <AppNext store={store} />
+        <Provider appStore={appStore}>
+          <AppNext />
+        </Provider>
       </AppContainer>,
       document.getElementById('root')
     )

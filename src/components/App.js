@@ -1,8 +1,10 @@
 // @flow
 
-import React, {PropTypes} from 'react'
-import { observer } from 'mobx-react'
+import React from 'react'
+import PropTypes from 'prop-types'
+import { inject, observer } from 'mobx-react'
 import { css, StyleSheet } from 'aphrodite'
+import { Container, UncontrolledAlert } from 'reactstrap'
 // import {styles} from '../styles/styles.css'
 import MyComponent from './MyComponent'
 
@@ -30,26 +32,28 @@ const styles = StyleSheet.create({
     },
 })
 
-@observer
 //NOTE: kept this as a class to show that lint gives you a hint when you should
 //write components as pure functions (stateless components)
-class App extends React.Component {
-  render() {
+const App = inject('appStore')(observer(({ appStore }) => {
 
-    const { name, description } = this.props.store
+  const { name, description } = appStore
 
-    return (
+  return (
+    <Container fluid >
       <div className="project">
+        <UncontrolledAlert color="success">
+          <strong>Well done!</strong> You successfully read this important alert message.
+        </UncontrolledAlert>
         <h2 className={css(styles.red)}>Welcome to the {name} project!!!</h2>
         <h3 className={css(styles.animate)}>This project is a {description}.</h3>
-        <MyComponent store={this.props.store} />
+        <MyComponent />
       </div>
-    )
-  }
-}
+    </Container>
+  )
+}))
 
-App.propTypes = {
-  store: PropTypes.object,
+App.wrappedComponent.propTypes = {
+  appStore: PropTypes.object.isRequired,
 }
 
 export default App
