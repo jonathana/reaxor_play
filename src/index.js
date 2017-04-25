@@ -1,5 +1,5 @@
 import React from 'react'
-import Axios from 'react-axios'
+import { AxiosProvider } from 'react-axios'
 import PropTypes from 'prop-types'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
@@ -30,11 +30,11 @@ if(process.env.NODE_ENV === 'development') {
 
 render(
   <AppContainer>
-    <Axios>
+    <AxiosProvider>
       <Provider appStore={appStore}>
         <App appStore={appStore} />
       </Provider>
-    </Axios>
+    </AxiosProvider>
   </AppContainer>,
   document.getElementById('root')
 )
@@ -44,9 +44,11 @@ if (module.hot) {
     let AppNext = require('./components/App').default
     render(
       <AppContainer>
-        <Provider appStore={appStore}>
-          <AppNext />
-        </Provider>
+        <AxiosProvider>
+          <Provider appStore={appStore}>
+            <AppNext />
+          </Provider>
+        </AxiosProvider>
       </AppContainer>,
       document.getElementById('root')
     )
